@@ -1,0 +1,16 @@
+aws rds create-db-instance \
+	--engine mysql \
+	--engine-version 8.0.28 \
+	--multi-az \
+	--db-instance-identifier aladin-db \
+	--master-username admin \
+	--master-user-password mysqladmin \
+	--db-instance-class db.t3.large \
+	--storage-type gp2 \
+	--allocated-storage 20 \
+	--max-allocated-storage 1000 \
+	--db-subnet-group-name eks-private-subnet-group \
+	--no-publicly-accessible \
+	--vpc-security-group-ids "sg-0c56cb76bfad0b78d" \
+	--backup-retention-period 7 \
+	--port 3306

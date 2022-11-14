@@ -3,8 +3,6 @@ availabilityZones:
 - ap-northeast-2a
 - ap-northeast-2b
 - ap-northeast-2c
-cloudWatch:
-  clusterLogging: {}
 iam:
   vpcResourceControllerPolicy: true
   withOIDC: true
@@ -13,7 +11,7 @@ kubernetesNetworkConfig:
   ipFamily: IPv4
 managedNodeGroups:
 - amiFamily: AmazonLinux2
-  desiredCapacity: 2
+  desiredCapacity: 3
   disableIMDSv1: false
   disablePodIMDS: false
   iam:
@@ -31,14 +29,13 @@ managedNodeGroups:
       fsx: false
       imageBuilder: false
       xRay: false
-  instanceSelector: {}
   instanceType: t2.micro
   labels:
-    alpha.eksctl.io/cluster-name: my-cluster
-    alpha.eksctl.io/nodegroup-name: ng-4668b9b8
-  maxSize: 2
-  minSize: 2
-  name: ng-4668b9b8
+    alpha.eksctl.io/cluster-name: goormEKS
+    alpha.eksctl.io/nodegroup-name: goorm-ng
+  maxSize: 6
+  minSize: 3
+  name: goorm-ng
   privateNetworking: true
   releaseVersion: ""
   securityGroups:
@@ -48,14 +45,14 @@ managedNodeGroups:
     allow: true
     publicKeyPath: goorm-aicore0909-20221111
   tags:
-    alpha.eksctl.io/nodegroup-name: ng-4668b9b8
+    alpha.eksctl.io/nodegroup-name: goorm-ng
     alpha.eksctl.io/nodegroup-type: managed
   volumeIOPS: 3000
   volumeSize: 80
   volumeThroughput: 125
   volumeType: gp3
 metadata:
-  name: my-cluster
+  name: goormEKS
   region: ap-northeast-2
   version: "1.23"
 privateCluster:

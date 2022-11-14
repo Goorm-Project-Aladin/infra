@@ -1,0 +1,72 @@
+apiVersion: eksctl.io/v1alpha5
+availabilityZones:
+- ap-northeast-2a
+- ap-northeast-2b
+- ap-northeast-2c
+cloudWatch:
+  clusterLogging: {}
+iam:
+  vpcResourceControllerPolicy: true
+  withOIDC: true
+kind: ClusterConfig
+kubernetesNetworkConfig:
+  ipFamily: IPv4
+managedNodeGroups:
+- amiFamily: AmazonLinux2
+  desiredCapacity: 2
+  disableIMDSv1: false
+  disablePodIMDS: false
+  iam:
+    withAddonPolicies:
+      albIngress: false
+      appMesh: false
+      appMeshPreview: false
+      autoScaler: false
+      awsLoadBalancerController: false
+      certManager: false
+      cloudWatch: false
+      ebs: false
+      efs: false
+      externalDNS: false
+      fsx: false
+      imageBuilder: false
+      xRay: false
+  instanceSelector: {}
+  instanceType: t2.micro
+  labels:
+    alpha.eksctl.io/cluster-name: my-cluster
+    alpha.eksctl.io/nodegroup-name: ng-4668b9b8
+  maxSize: 2
+  minSize: 2
+  name: ng-4668b9b8
+  privateNetworking: true
+  releaseVersion: ""
+  securityGroups:
+    withLocal: null
+    withShared: null
+  ssh:
+    allow: true
+    publicKeyPath: goorm-aicore0909-20221111
+  tags:
+    alpha.eksctl.io/nodegroup-name: ng-4668b9b8
+    alpha.eksctl.io/nodegroup-type: managed
+  volumeIOPS: 3000
+  volumeSize: 80
+  volumeThroughput: 125
+  volumeType: gp3
+metadata:
+  name: my-cluster
+  region: ap-northeast-2
+  version: "1.23"
+privateCluster:
+  enabled: false
+  skipEndpointCreation: false
+vpc:
+  autoAllocateIPv6: false
+  cidr: 192.168.0.0/16
+  clusterEndpoints:
+    privateAccess: false
+    publicAccess: true
+  manageSharedNodeSecurityGroupRules: true
+  nat:
+    gateway: HighlyAvailable

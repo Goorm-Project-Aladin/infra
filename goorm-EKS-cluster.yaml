@@ -32,10 +32,10 @@ managedNodeGroups:
   instanceType: t2.micro
   labels:
     alpha.eksctl.io/cluster-name: goormEKS
-    alpha.eksctl.io/nodegroup-name: goorm-ng
+    alpha.eksctl.io/nodegroup-name: default-ng
   maxSize: 6
   minSize: 3
-  name: goorm-ng
+  name: default-ng
   privateNetworking: true
   releaseVersion: ""
   securityGroups:
@@ -45,7 +45,7 @@ managedNodeGroups:
     allow: true
     publicKeyPath: goorm-aicore0909-20221111
   tags:
-    alpha.eksctl.io/nodegroup-name: goorm-ng
+    alpha.eksctl.io/nodegroup-name: default-ng
     alpha.eksctl.io/nodegroup-type: managed
   volumeIOPS: 3000
   volumeSize: 80

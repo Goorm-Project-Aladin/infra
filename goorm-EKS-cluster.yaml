@@ -29,7 +29,7 @@ managedNodeGroups:
       fsx: false
       imageBuilder: false
       xRay: false
-  instanceType: t2.micro
+  instanceType: t2.large
   labels:
     alpha.eksctl.io/cluster-name: goormEKS
     alpha.eksctl.io/nodegroup-name: default-ng

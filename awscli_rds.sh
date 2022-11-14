@@ -5,7 +5,7 @@ aws rds create-db-instance \
 	--db-instance-identifier aladin-db \
 	--master-username admin \
 	--master-user-password mysqladmin \
-	--db-instance-class db.t3.large \
+	--db-instance-class db.t3.micro \
 	--storage-type gp2 \
 	--allocated-storage 20 \
 	--max-allocated-storage 1000 \

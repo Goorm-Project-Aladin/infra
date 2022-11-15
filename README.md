@@ -4,11 +4,9 @@
 
 1. Create Cloud9(Bastion) server
 
-2. Configure Cloud9
+2. Disable AWS Settings - Credentials
 
     ![Config Cloud9](https://github.com/Goorm-Project-Aladin/infra/blob/main/images/1.png)
-
-    a. 
 
 3. Clone repository
     ```bash
@@ -17,6 +15,8 @@
 
 4. Configure Bastion server
     ```bash
+    aws configure
+
     bash ./bastion-config.sh
     ```
 

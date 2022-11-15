@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # kubectl 설치(Kubernetes 1.23)
-curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
 echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
@@ -22,7 +22,7 @@ sudo yum install bash-completion -y
 # 자동 완성 스크립트 결과 저장
 echo 'source <(kubectl completion bash)' >>~/.bashrc
 
-# kubectl(k) alias 설정
+# kubectl alias 설정
 echo 'alias k=kubectl' >>~/.bashrc
 echo 'complete -F __start_kubectl k' >>~/.bashrc
 

@@ -13,4 +13,4 @@ helm install grafana grafana/grafana -f values-grafana.yaml -n monitoring
 
 
 # 배포 확인
-kubectl get pod,svc -n prometheus
+kubectl get pod,svc -n monitoring

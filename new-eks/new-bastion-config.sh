@@ -9,6 +9,10 @@ rm -vf ${HOME}/.aws/credentials
 ## AWS CLI 업데이트
 sudo pip install --upgrade awscli
 
+## Install another tool
+sudo yum install -y jq
+sudo yum install -y bash-completion
+
 ## kubectl 설치(Kubernetes 1.23)
 curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl
 chmod +x ./kubectl
@@ -22,9 +26,6 @@ echo 'source <(kubectl completion bash)' >>~/.bashrc
 echo 'alias k=kubectl' >>~/.bashrc
 echo 'complete -F __start_kubectl k' >>~/.bashrc
 
-## Install another tool
-sudo yum install -y jq
-sudo yum install -y bash-completion
 
 # eksctl 설치
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp

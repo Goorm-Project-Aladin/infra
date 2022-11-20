@@ -7,11 +7,7 @@ aws cloud9 update-environment --environment-id $C9_PID \
 rm -vf ${HOME}/.aws/credentials
 
 ## AWS CLI 업데이트
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-export PATH=/usr/local/bin:$PATH
-source ~/.bash_profile
+sudo pip install --upgrade awscli
 
 ## kubectl 설치(Kubernetes 1.23)
 curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl

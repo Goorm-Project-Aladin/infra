@@ -1,12 +1,9 @@
-#!/bin/bash
-
-## Cloud9 설정
 # Remove the temporary credentials that Cloud9 is using.
 aws cloud9 update-environment --environment-id $C9_PID \
   --managed-credentials-action DISABLE
 rm -vf ${HOME}/.aws/credentials
 
-## AWS CLI 업데이트
+# AWS CLI 업데이트
 sudo pip install --upgrade awscli
 
 ## Install another tool
@@ -25,40 +22,28 @@ echo 'source <(kubectl completion bash)' >>~/.bashrc
 # kubectl alias 설정
 echo 'alias k=kubectl' >>~/.bashrc
 echo 'complete -F __start_kubectl k' >>~/.bashrc
-
+source ~/.bashrc
 
 # eksctl 설치
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 sudo mv -v /tmp/eksctl /usr/local/bin
 
-## kubectl 자동완성 기능 설정
-# 패키지 설치
-sudo yum update
-sudo yum install bash-completion -y
-
 ## Cloud9 추가 세팅
+# 현재 리전을 기본 값으로 aws cli를 설정
 export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
 
 echo "export AWS_REGION=${AWS_REGION}" | tee -a ~/.bash_profile
     
 aws configure set default.region ${AWS_REGION}
 
-aws configure get default.region
-
+# 현재 계정 ID를 환경 변수로 등록
 export ACCOUNT_ID=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.accountId')
 
 echo "export ACCOUNT_ID=${ACCOUNT_ID}" | tee -a ~/.bash_profile
 
-## 도커 빌드 시 이미지 크기때문에 용량 부족 이슈가 발생할 수 있으므로 디스크 사이즈 30GB로 증설
+# 도커 빌드 시 이미지 크기때문에 용량 부족 이슈가 발생할 수 있으므로 디스크 사이즈 30GB로 증설
 wget https://gist.githubusercontent.com/joozero/b48ee68e2174a4f1ead93aaf2b582090/raw/2dda79390a10328df66e5f6162846017c682bef5/resize.sh
 sh resize.sh
-# 볼륨 크기 확인
-df -h
 
-
-# 환경 설정 확인
-aws sts get-caller-identity | jq -r '.Arn'
-
-echo "kubectl version: $(eksctl version)"
-kubectl version --short --client
-echo "kubectl, eksctl installed"
+# Helm 업그레이드
+curl -L https://git.io/get_helm.sh | bash -s -- --version v3.8.2

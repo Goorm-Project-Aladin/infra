@@ -1,5 +1,47 @@
 #!/bin/bash
 
+# IAM user 생성
+aws iam create-user --user-name github-action
+# ECR policy 생성
+cat <<EOF> ecr-policy.json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowPush",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:BatchGetImage",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:PutImage",
+                "ecr:InitiateLayerUpload",
+                "ecr:UploadLayerPart",
+                "ecr:CompleteLayerUpload"
+            ],
+            "Resource": "arn:aws:ecr:${AWS_REGION}:${ACCOUNT_ID}:repository/$1"
+        },
+        {
+            "Sid": "GetAuthorizationToken",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:GetAuthorizationToken"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+EOF
+
+aws iam create-policy --policy-name ecr-policy --policy-document file://ecr-policy.json
+
+# ECR policy를 IAM user에 부여
+aws iam attach-user-policy --user-name github-action --policy-arn arn:aws:iam::${ACCOUNT_ID}:policy/ecr-policy
+
+
+aws iam create-access-key --user-name github-action
+
+
 # EKS에 ArgoCD 설치
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml

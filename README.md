@@ -13,26 +13,38 @@
     git clone https://github.com/Goorm-Project-Aladin/infra.git && cd infra
     ```
 
-2. Configure Cloud9
+3. Configure Cloud9
 
-    b. EC2 - 인스턴스 - cloud9 인스턴스 선택 - 작업 - 보안 - IAM 역할 수정 - IAM 역할 업데이트
+    a. EC2 - 인스턴스 - cloud9 인스턴스 선택 - 작업 - 보안 - IAM 역할 수정 - IAM 역할 업데이트
 
-    c. Server settings
+    b. Server settings
     ```bash
-    bash ./bastion-config.sh
+    bash ./config-environment.sh
     ```
 
-4. Install helm
+4. Create EKS Cluster
     ```bash
-    bash ./helm-install.sh
+    cd create-cluster
+    bash ./create-cluster.sh {클러스터 이름}
     ```
 
-5. Create EKS Cluster
+5. Create ALB Ingress controller
     ```bash
-    eksctl create cluster -f aladinEKS.yaml
+    cd ../alb-ingress-controller
+    bash ./create-loadBalancerController.sh
     ```
 
-6. Create RDS service
+6. Create EBS CSI Driver
     ```bash
-    bash ./awscli_rds.sh
+    cd ../aws-ebs-csi-driver
+    bash ./aws-ebs-csi-driver.sh
+    ```
+
+7. CI/CD
+    [CI/CD 파이프라인 구성](https://catalog.us-east-1.prod.workshops.aws/workshops/9c0aa9ab-90a9-44a6-abe1-8dff360ae428/ko-KR/110-cicd/100-cicd)
+
+8. Monitoring(Prometheus + Grafana)
+    ```bash
+    cd ../monitoring
+    bash ./monitoring.sh
     ```

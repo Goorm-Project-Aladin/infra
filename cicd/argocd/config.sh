@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export IMAGE_NAME=$1
+
 # IAM user 생성
 aws iam create-user --user-name github-action
 # ECR policy 생성
@@ -19,7 +21,7 @@ cat <<EOF> ecr-policy.json
                 "ecr:UploadLayerPart",
                 "ecr:CompleteLayerUpload"
             ],
-            "Resource": "arn:aws:ecr:${AWS_REGION}:${ACCOUNT_ID}:repository/$1"
+            "Resource": "arn:aws:ecr:${AWS_REGION}:${ACCOUNT_ID}:repository/$IMAGE_NAME"
         },
         {
             "Sid": "GetAuthorizationToken",

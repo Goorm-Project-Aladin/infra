@@ -4,7 +4,7 @@
 
 [Creating an EKS Cluster in AWS with Cloud9](https://towardsaws.com/creating-an-eks-cluster-in-aws-with-cloud9-781e21c237cc)
 
-[AWS Cloud9 시작하기](https://catalog.us-east-1.prod.workshops.aws/workshops/9c0aa9ab-90a9-44a6-abe1-8dff360ae428/ko-KR/30-setting/100-aws-cloud9)
+[AWS EKS Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/9c0aa9ab-90a9-44a6-abe1-8dff360ae428/ko-KR/30-setting/100-aws-cloud9)
 
 1. Create Cloud9(Bastion) server
 

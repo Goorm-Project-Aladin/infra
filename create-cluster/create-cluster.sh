@@ -1,7 +1,9 @@
 #!/bin/bash
 
+export CLUSTER_NAME=$1
+envsubst < eks-cluster.yaml > $CLUSTER_NAME.yaml
 # EKS 클러스터 생성
-eksctl create cluster -f eks-aladin-cluster.yaml
+eksctl create cluster -f $CLUSTER_NAME.yaml
 
 # 콘솔 Credential을 클러스터에 추가
 rolearn=$(aws cloud9 describe-environment-memberships --environment-id=$C9_PID | jq -r '.memberships[].userArn')
@@ -11,6 +13,6 @@ if [[ "$rolearn" =~ "assumed-role" ]]; then
 fi
 
 # identity 맵핑
-eksctl create iamidentitymapping --cluster eks-demo --arn ${rolearn} --group system:masters --username admin
+eksctl create iamidentitymapping --cluster $CLUSTER_NAME --arn ${rolearn} --group system:masters --username admin
 # 관련 정보 확인
 kubectl describe configmap -n kube-system aws-auth

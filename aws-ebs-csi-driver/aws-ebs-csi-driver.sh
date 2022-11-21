@@ -3,7 +3,7 @@
 eksctl create iamserviceaccount \
   --name ebs-csi-controller-sa \
   --namespace kube-system \
-  --cluster $1 \
+  --cluster $CLUSTER_NAME \
   --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
   --approve \
   --role-only \
@@ -17,6 +17,6 @@ if [[ -n $IS_EXIST ]]; then
 fi
 
 eksctl create addon --name aws-ebs-csi-driver \
-    --cluster $1 \
+    --cluster $CLUSTER_NAME \
     --service-account-role-arn arn:aws:iam::$ACCOUNT_ID:role/AmazonEKS_EBS_CSI_DriverRole \
     --force

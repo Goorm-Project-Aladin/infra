@@ -1,11 +1,11 @@
 #!/bin/bash
 
-OIDC_provider_URL=$(aws eks describe-cluster --name $1 --query "cluster.identity.oidc.issuer" --output text | awk -F "/" '{ print $5 }')
+OIDC_provider_URL=$(aws eks describe-cluster --name $CLUSTER_NAME --query "cluster.identity.oidc.issuer" --output text | awk -F "/" '{ print $5 }')
 CHECK_OIDC=$(aws iam list-open-id-connect-providers | grep $OIDC_provider_URL)
 if [[ -z ${CHECK_OIDC} ]]; then
     eksctl utils associate-iam-oidc-provider \
         --region ${AWS_REGION} \
-        --cluster $1 \
+        --cluster $CLUSTER_NAME \
         --approve
 fi
 
@@ -15,7 +15,7 @@ aws iam create-policy \
 
 # AWS Load Balancer Controller를 위한 ServiceAccount를 생성
 eksctl create iamserviceaccount \
-    --cluster $1 \
+    --cluster $CLUSTER_NAME \
     --namespace kube-system \
     --name aws-load-balancer-controller \
     --attach-policy-arn arn:aws:iam::$ACCOUNT_ID:policy/AWSLoadBalancerControllerIAMPolicy \
@@ -30,7 +30,7 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 # 로드밸런서 YAML 파일 다운로드
 wget https://github.com/kubernetes-sigs/aws-load-balancer-controller/releases/download/v2.4.4/v2_4_4_full.yaml
 # YAML 파일 편집
-sed -i 's/your-cluster-name/$1/g' v2_4_4_full.yaml
+sed -i 's/your-cluster-name/$CLUSTER_NAME/g' v2_4_4_full.yaml
 sed '480,488d' v2_4_4_full.yaml
 
 kubectl apply -f v2_4_4_full.yaml

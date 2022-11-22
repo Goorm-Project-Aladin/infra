@@ -26,9 +26,9 @@ up() {
         --storage-type gp2 \
         --allocated-storage 20 \
         --max-allocated-storage 1000 \
-        --db-subnet-group-name eks-rds-subnet-group \
+        --db-subnet-group-name eks-demo-rds-subnet-group \
         --no-publicly-accessible \
-        --vpc-security-group-ids "sg-0f2aadf47f2de15f5" \
+        --vpc-security-group-ids "sg-0bc87f6799b8dd098" \
         --backup-retention-period 7 \
         --preferred-backup-window 02:00-03:00 \
         --no-auto-minor-version-upgrade \

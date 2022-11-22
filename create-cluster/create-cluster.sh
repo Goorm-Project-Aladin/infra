@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export CLUSTER_NAME=$1
+echo "export CLUSTER_NAME=$1" >> ~/.bashrc
 envsubst < eks-cluster.yaml > $CLUSTER_NAME.yaml
 # EKS 클러스터 생성
 eksctl create cluster -f $CLUSTER_NAME.yaml
@@ -16,3 +16,7 @@ fi
 eksctl create iamidentitymapping --cluster $CLUSTER_NAME --arn ${rolearn} --group system:masters --username admin
 # 관련 정보 확인
 kubectl describe configmap -n kube-system aws-auth
+
+echo "***************************************************"
+echo "*Open another terminal & Preceed next process!!!!!*"
+echo "***************************************************"

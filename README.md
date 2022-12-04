@@ -1,5 +1,17 @@
 # infra
 
+## 프로젝트 자료
+
+[프로젝트 개요](https://github.com/Goorm-Project-Aladin/infra/blob/main/프로젝트_자료/1조_프로젝트_개요.pdf)
+
+[문제 정의서](https://github.com/Goorm-Project-Aladin/infra/blob/main/프로젝트_자료/1조_문제정의서.pdf)
+
+[설계서](https://github.com/Goorm-Project-Aladin/infra/blob/main/프로젝트_자료/1조_설계서.pdf)
+
+[구축](https://github.com/Goorm-Project-Aladin/infra/blob/main/프로젝트_자료/1조_구축.pdf)
+
+[테스트](https://github.com/Goorm-Project-Aladin/infra/blob/main/프로젝트_자료/1조_테스트.pdf)
+
 ## How to?
 
 [Creating an EKS Cluster in AWS with Cloud9](https://towardsaws.com/creating-an-eks-cluster-in-aws-with-cloud9-781e21c237cc)

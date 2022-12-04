@@ -2,6 +2,8 @@
 
 ## 프로젝트 자료
 
+[발표 자료](https://github.com/Goorm-Project-Aladin/infra/blob/main/프로젝트_자료/발표자료.pptx)
+
 [프로젝트 개요](https://github.com/Goorm-Project-Aladin/infra/blob/main/프로젝트_자료/1조_프로젝트_개요.pdf)
 
 [문제 정의서](https://github.com/Goorm-Project-Aladin/infra/blob/main/프로젝트_자료/1조_문제정의서.pdf)
